@@ -1,0 +1,28 @@
+CREATE SCHEMA exjpa;
+
+USE exjpa;
+
+CREATE TABLE dono (
+	dono_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+	dono_nome VARCHAR(50) NOT NULL,
+	dono_endereco VARCHAR(100) NOT NULL,
+	dono_telefone VARCHAR(20) NOT NULL,
+	CONSTRAINT dono_pk PRIMARY KEY (dono_id),
+	CONSTRAINT dono_nome_uk UNIQUE KEY (dono_nome)
+);
+
+CREATE TABLE animal (
+	ani_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+	ani_nome VARCHAR(50) NOT NULL,
+	ani_especie VARCHAR(50) NOT NULL,
+	ani_raca VARCHAR(20),
+	CONSTRAINT animal_pk PRIMARY KEY (ani_id)
+);
+
+CREATE TABLE dono_animal (
+	dono_id BIGINT UNSIGNED NOT NULL,
+	ani_id BIGINT UNSIGNED NOT NULL,
+	PRIMARY KEY (dono_id, ani_id),
+	FOREIGN KEY da_dono_fk (dono_id) REFERENCES dono (dono_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+	FOREIGN KEY da_animal_fk (ani_id) REFERENCES animal (ani_id) ON DELETE RESTRICT ON UPDATE CASCADE
+);
