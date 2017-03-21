@@ -1,4 +1,4 @@
-package model;
+package br.gov.sp.fatec.model;
 import java.util.List;
 
 import javax.persistence.*;
