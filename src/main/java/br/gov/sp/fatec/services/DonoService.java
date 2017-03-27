@@ -9,20 +9,22 @@ import br.gov.sp.fatec.model.Dono;
 @Service("donoService")
 public class DonoService {
 	
-	public DonoService(DonoRepository donoRepo){
-		this.donoRepo = donoRepo;
+	public DonoService(){
 	}
 	
 	@Autowired
 	private DonoRepository donoRepo;
 	
+
 	@Transactional
-	public void insertDono(String nome, String endereco, String tel) {
-		Dono dono1 = new Dono();
-		dono1.setNome(nome);
-		dono1.setEndereco(endereco);
-		dono1.setTelefone(tel);
-		donoRepo.save(dono1);
+	public void insertDono(String nome, String endereco, String tel) throws Exception {
+		Dono dono = donoRepo.findByNome(nome);
+		if (dono!=null && nome.equals(dono.getNome())) throw new Exception("Dono já cadastrado no sistema!");
+		dono = new Dono();
+		dono.setNome(nome);
+		dono.setEndereco(endereco);
+		dono.setTelefone(tel);
+		donoRepo.save(dono);
 	}
 	
 	@Transactional
@@ -30,5 +32,7 @@ public class DonoService {
 		donoRepo.delete(dono);
 	}
 	
-	
+	public void setDonoRepo(DonoRepository donoRepo) {
+		this.donoRepo = donoRepo;
+	}
 }

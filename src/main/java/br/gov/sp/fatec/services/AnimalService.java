@@ -7,27 +7,26 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.sp.fatec.repositories.AnimalRepository;
 import br.gov.sp.fatec.model.Animal;
+import br.gov.sp.fatec.model.Dono;
 
 @Service("animalService")
 public class AnimalService {
-	public AnimalService(AnimalRepository animalRepo){
-		this.animalRepo = animalRepo;
+	public AnimalService(){
 	}
 	
+
 	@Autowired
 	private AnimalRepository animalRepo;
 	
 	@Transactional
-	public void insertAnimal(String nome, String especie, String raca) {
-//	public void insertAnimal(String nome, String especie, String raca, Long ani_dono_id) {
-		
-		Animal animal1 = new Animal();
-		animal1.setNome(nome);
-		// como inserir o id do dono?
-		// animal1.setAni_dono_id(ani_dono_id);
-		animal1.setEspecie(especie);
-		animal1.setRaca(raca);
-		animalRepo.save(animal1);
+	public void insertAnimal(String nome, String especie, String raca, Dono dono) {
+		Animal animal = new Animal();
+		animal.setNome(nome);
+		animal.setEspecie(especie);
+		animal.setRaca(raca);
+		// Dono vinculado ao animal
+		animal.setDono(dono);
+		animalRepo.save(animal);
 	}
 	
 	@Transactional
@@ -35,4 +34,7 @@ public class AnimalService {
 		animalRepo.delete(animal);
 	}
 	
+	public void setAnimalRepo(AnimalRepository animalRepo) {
+		this.animalRepo = animalRepo;
+	}
 }	

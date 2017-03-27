@@ -1,11 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>br.gov.sp.fatec</groupId>
-  <artifactId>jpaExercicio2</artifactId>
-  <packaging>jar</packaging>
+
+  <groupId>br.sp.gov.fatec</groupId>
+  <artifactId>springDataJpa</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>jpaExercicio2</name>
+  <packaging>jar</packaging>
+
+  <name>springDataJpa</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -15,15 +17,15 @@
     <org.hibernate.version>5.0.7.Final</org.hibernate.version>
     <mysql.version>5.1.38</mysql.version>
   </properties>
-
+  
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>4.12</version>
       <scope>test</scope>
     </dependency>
-
+    
     <!-- Spring -->
     <dependency>
       <groupId>org.springframework</groupId>
@@ -59,6 +61,6 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>${mysql.version}</version>
     </dependency>
-    
+        
   </dependencies>
 </project>

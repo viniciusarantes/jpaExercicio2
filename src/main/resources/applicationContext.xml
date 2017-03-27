@@ -12,7 +12,21 @@
         
     <context:component-scan base-package="br.gov.sp.fatec"/>
     
-    <jpa:repositories base-package="br.gov.sp.fatec.repository"/>
+    <jpa:repositories base-package="br.gov.sp.fatec.repositories"/>
+	
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+		p:packagesToScan="br.gov.sp.fatec.model"
+		p:dataSource-ref="dataSource"
+		>
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="generateDdl" value="false" />
+				<property name="showSql" value="true" />
+				<property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect"/>
+			</bean>
+		</property>
+	</bean>
 
     <!-- Datasource -->
     <bean id="dataSource" 
@@ -23,19 +37,7 @@
         <property name="password" value="root" />
     </bean>
     
-    <bean id="entityManagerFactory"
-        class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
-        p:packagesToScan="br.gov.sp.fatec.model"
-        p:dataSource-ref="dataSource"
-        >
-        <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <property name="generateDdl" value="false" />
-                <property name="showSql" value="true" />
-                <property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect"/>
-            </bean>
-        </property>
-    </bean>
+    
     
     <bean id="transactionManager"
         class="org.springframework.orm.jpa.JpaTransactionManager">
