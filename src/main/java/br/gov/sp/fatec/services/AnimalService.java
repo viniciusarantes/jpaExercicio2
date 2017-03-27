@@ -34,6 +34,11 @@ public class AnimalService {
 		animalRepo.delete(animal);
 	}
 	
+	@Transactional
+	public void deleteAllAnimal(){
+		animalRepo.deleteAll();
+	}
+	
 	public void setAnimalRepo(AnimalRepository animalRepo) {
 		this.animalRepo = animalRepo;
 	}

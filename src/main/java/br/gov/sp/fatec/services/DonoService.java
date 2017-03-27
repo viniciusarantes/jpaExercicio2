@@ -31,6 +31,11 @@ public class DonoService {
 	public void deleteDono(Dono dono){
 		donoRepo.delete(dono);
 	}
+
+	@Transactional
+	public void deleteAllDono(){
+		donoRepo.deleteAll();
+	}
 	
 	public void setDonoRepo(DonoRepository donoRepo) {
 		this.donoRepo = donoRepo;
