@@ -22,10 +22,6 @@ public class Dono {
 	@Column(name = "dono_telefone", unique=false, length = 20, nullable = false)
     private String telefone;
 
-//	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-//	@JoinTable(name="dono_animal", 
-//			   joinColumns={@JoinColumn(name="dono_id")}, 
-//			   inverseJoinColumns={@JoinColumn(name="ani_id")})
 	@OneToMany(mappedBy = "dono", targetEntity = Animal.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Animal> animais;
     
