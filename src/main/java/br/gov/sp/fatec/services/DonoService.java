@@ -1,4 +1,7 @@
 package br.gov.sp.fatec.services;
+import java.util.Collection;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,6 +38,21 @@ public class DonoService {
 	@Transactional
 	public void deleteAllDono(){
 		donoRepo.deleteAll();
+	}
+	
+	public Dono buscarDono(String nome){
+		if (donoRepo == null) return null;
+		return donoRepo.findByNome(nome);
+	}
+	
+	public Dono buscarId(Long id){
+		if (donoRepo == null) return null;
+		return donoRepo.findById(id);
+	}
+	
+	public Dono insertDonoWeb(Dono dono) {
+		donoRepo.save(dono);
+		return dono;
 	}
 	
 	public void setDonoRepo(DonoRepository donoRepo) {

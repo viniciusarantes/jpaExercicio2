@@ -9,6 +9,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface DonoRepository extends CrudRepository<Dono, Long>  {
 	public Dono findByNome(String nome);
+	public Dono findById(Long id);
 	
 	@Query("SELECT d FROM Dono d")
 	public List<Dono> getAllDonos();

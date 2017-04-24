@@ -3,6 +3,10 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import br.gov.sp.fatec.view.View;
+
 
 @Entity
 @Table(name = "dono")
@@ -11,6 +15,7 @@ public class Dono {
 	@Id 
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "dono_id")
+	@JsonView(View.Main.class)
 	private Long id;
 	
 	@Column(name = "dono_nome", unique=true, length = 50, nullable = false)
