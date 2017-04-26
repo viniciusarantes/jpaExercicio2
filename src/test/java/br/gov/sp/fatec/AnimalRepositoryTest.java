@@ -27,15 +27,15 @@ public class AnimalRepositoryTest {
 	private static final String RACA = "Jiu-Jitsu";	
 	
 	@Autowired
-	private DonoService donoServ;	
-	public void setDonoServ(DonoService donoServ) { this.donoServ = donoServ; }
+	private DonoServiceImpl donoServ;	
+	public void setDonoServ(DonoServiceImpl donoServ) { this.donoServ = donoServ; }
 	@Autowired
 	private DonoRepository donoRepo;
 	public void setDonoRepo(DonoRepository donoRepo) { this.donoRepo = donoRepo; }
 	
 	@Autowired
-	private AnimalService animalServ;	
-	public void setAnimalServ(AnimalService animalServ) { this.animalServ = animalServ; }
+	private AnimalServiceImpl animalServ;	
+	public void setAnimalServ(AnimalServiceImpl animalServ) { this.animalServ = animalServ; }
 	@Autowired
 	private AnimalRepository animalRepo;
 	public void setAnimalRepo(AnimalRepository animalRepo) { this.animalRepo = animalRepo; }

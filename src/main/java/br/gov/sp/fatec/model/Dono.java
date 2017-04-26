@@ -2,12 +2,14 @@ package br.gov.sp.fatec.model;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
 import br.gov.sp.fatec.view.View;
 
-
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name = "dono")
 public class Dono {
@@ -28,6 +30,7 @@ public class Dono {
     private String telefone;
 
 	@OneToMany(mappedBy = "dono", targetEntity = Animal.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@XmlElement(name = "animais")
 	private List<Animal> animais;
     
 	

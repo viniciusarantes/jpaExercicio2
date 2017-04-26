@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.sp.fatec.model.Dono;
-import br.gov.sp.fatec.services.DonoService;
+import br.gov.sp.fatec.services.DonoServiceImpl;
 import br.gov.sp.fatec.repositories.DonoRepository;
 
 
@@ -28,8 +28,8 @@ public class DonoServiceTest {
 	private static final String TELEFONE = "3652-1515";
 	
 	@Autowired
-	private DonoService donoServ;	
-	public void setDonoServ(DonoService donoServ) { this.donoServ = donoServ; }
+	private DonoServiceImpl donoServ;	
+	public void setDonoServ(DonoServiceImpl donoServ) { this.donoServ = donoServ; }
 	
 	@Autowired
 	private DonoRepository donoRepo;

@@ -27,8 +27,8 @@ public class App
 		
 		// ambos os services pedem para passar um repository como parametro
 		// porém ainda não sei como fazer
-		AnimalService animalServ = (AnimalService)context.getBean("animalService");
-		DonoService donoServ = (DonoService)context.getBean("donoService");
+		AnimalServiceImpl animalServ = (AnimalServiceImpl)context.getBean("animalService");
+		DonoServiceImpl donoServ = (DonoServiceImpl)context.getBean("donoService");
 		animalServ.setAnimalRepo(animalRepo);
 		donoServ.setDonoRepo(donoRepo);
 		Dono donoInsert = new Dono();

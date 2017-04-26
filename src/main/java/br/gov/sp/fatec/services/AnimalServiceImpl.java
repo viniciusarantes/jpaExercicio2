@@ -10,8 +10,8 @@ import br.gov.sp.fatec.model.Animal;
 import br.gov.sp.fatec.model.Dono;
 
 @Service("animalService")
-public class AnimalService {
-	public AnimalService(){
+public class AnimalServiceImpl {
+	public AnimalServiceImpl(){
 	}
 	
 

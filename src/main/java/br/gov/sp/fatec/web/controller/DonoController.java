@@ -12,10 +12,11 @@ import br.gov.sp.fatec.view.View;
 
 @RestController
 @RequestMapping(value = "/dono")
-public class DonoWebService {
+public class DonoController {
 	
 	@Autowired
 	private DonoService donoService;
+	
 	public void setDonoService(DonoService donoService) {
 		this.donoService = donoService;
 	}
@@ -24,7 +25,7 @@ public class DonoWebService {
 	@JsonView(View.All.class)
 	@ResponseStatus(HttpStatus.CREATED)
 	public Dono salvar(@RequestBody Dono dono, HttpServletRequest request, HttpServletResponse response) {
-		dono = donoService.insertDonoWeb(dono);
+		dono = donoService.salvar(dono);
 		response.addHeader("Location", request.getServerName() + ":" + request.getServerPort() +
 		request.getContextPath() + "/usuario/getById?id=" + dono.getId());
 		return dono;
@@ -33,13 +34,13 @@ public class DonoWebService {
 	@RequestMapping(value = "/get/{nome}")
 	@JsonView(View.All.class)
 	public ResponseEntity<Dono> pesquisar(@PathVariable("nome") String nome) {
-		return new ResponseEntity<Dono>(donoService.buscarDono(nome), HttpStatus.OK);
+		return new ResponseEntity<Dono>(donoService.buscar(nome), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/getById")
 	@JsonView(View.All.class)
 	public ResponseEntity<Dono> get(@RequestParam(value="id", defaultValue="1") Long id) {
-		Dono dono = donoService.buscarId(id);
+		Dono dono = donoService.buscar(id);
 		if(dono == null) {
 			return new ResponseEntity<Dono>(HttpStatus.NOT_FOUND);
 		}
