@@ -1,4 +1,5 @@
 package br.gov.sp.fatec.model;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.*;
@@ -8,8 +9,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import br.gov.sp.fatec.view.View;
 
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name = "dono")
 public class Dono {
@@ -30,12 +29,11 @@ public class Dono {
     private String telefone;
 
 	@OneToMany(mappedBy = "dono", targetEntity = Animal.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@XmlElement(name = "animais")
-	private List<Animal> animais;
+	private Collection<Animal> animais;
     
 	
 	// GETTERS E SETTERS
-	public List<Animal> getAnimais() {return animais;}
+	public Collection<Animal> getAnimais() {return animais;}
 	public String getEndereco() {return endereco;}
 	public void setEndereco(String endereco) {this.endereco = endereco;}
 	public String getTelefone() {return telefone;}

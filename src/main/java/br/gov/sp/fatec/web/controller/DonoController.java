@@ -11,7 +11,7 @@ import br.gov.sp.fatec.services.DonoService;
 import br.gov.sp.fatec.view.View;
 
 @RestController
-@RequestMapping(value = "/dono")
+//@RequestMapping(value = "/dono")
 public class DonoController {
 	
 	@Autowired
@@ -19,6 +19,11 @@ public class DonoController {
 	
 	public void setDonoService(DonoService donoService) {
 		this.donoService = donoService;
+	}
+	
+	@RequestMapping(value="/")
+	public String inicio() {
+		return "Deu certo";
 	}
 	
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -34,7 +39,11 @@ public class DonoController {
 	@RequestMapping(value = "/get/{nome}")
 	@JsonView(View.All.class)
 	public ResponseEntity<Dono> pesquisar(@PathVariable("nome") String nome) {
-		return new ResponseEntity<Dono>(donoService.buscar(nome), HttpStatus.OK);
+		Dono d = donoService.buscar(nome);
+		System.out.println("\n******************\n");
+		System.out.println("Id:"+Long.toString(d.getId())+"\nNome: "+d.getNome()+"\nTelefone: "+d.getTelefone());
+		System.out.println("\n******************\n");
+		return new ResponseEntity<Dono>(d, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/getById")

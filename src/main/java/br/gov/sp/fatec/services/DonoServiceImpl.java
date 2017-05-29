@@ -10,7 +10,7 @@ import br.gov.sp.fatec.repositories.DonoRepository;
 import br.gov.sp.fatec.model.Dono;
 
 @Service("donoService")
-public class DonoServiceImpl {
+public class DonoServiceImpl implements DonoService{
 	
 	public DonoServiceImpl(){
 	}
@@ -40,22 +40,23 @@ public class DonoServiceImpl {
 		donoRepo.deleteAll();
 	}
 	
-	public Dono buscarDono(String nome){
-		if (donoRepo == null) return null;
-		return donoRepo.findByNome(nome);
-	}
-	
-	public Dono buscarId(Long id){
-		if (donoRepo == null) return null;
-		return donoRepo.findById(id);
-	}
-	
-	public Dono insertDonoWeb(Dono dono) {
-		donoRepo.save(dono);
-		return dono;
-	}
 	
 	public void setDonoRepo(DonoRepository donoRepo) {
 		this.donoRepo = donoRepo;
+	}
+
+	public Dono salvar(Dono dono) {
+		donoRepo.save(dono);
+		return dono;
+	}
+
+	public Dono buscar(String nome) {
+		if (donoRepo == null) return null;
+		return donoRepo.findByNome(nome);
+	}
+
+	public Dono buscar(Long id) {
+		if (donoRepo == null) return null;
+		return donoRepo.findById(id);
 	}
 }
