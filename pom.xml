@@ -43,13 +43,6 @@
       <artifactId>spring-webmvc</artifactId>
       <version>${org.springframework.version}</version>
     </dependency>
-
-    <!-- Spring data -->
-    <dependency>
-      <groupId>org.springframework.data</groupId>
-      <artifactId>spring-data-jpa</artifactId>
-      <version>${org.springframework.data.version}</version>
-    </dependency>
     
     <!-- Spring security -->
     <dependency>
@@ -62,6 +55,14 @@
       <artifactId>spring-security-config</artifactId>
       <version>${org.springframework.security.version}</version>
     </dependency>
+
+    <!-- Spring data -->
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-jpa</artifactId>
+      <version>${org.springframework.data.version}</version>
+    </dependency>
+    
 
     <!-- Hibernate -->
     <dependency>

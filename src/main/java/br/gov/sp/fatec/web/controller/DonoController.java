@@ -26,9 +26,9 @@ public class DonoController {
 		return "Deu certo";
 	}
 	
-	@RequestMapping(value="/generica")
+	@RequestMapping(value="/dono")
 	public String meio() {
-		return "Deu generico";
+		return "Deu dono";
 	}
 	
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
