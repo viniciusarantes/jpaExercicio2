@@ -2,11 +2,19 @@ CREATE SCHEMA exjpa;
 
 USE exjpa;
 
+CREATE TABLE autorizacao (
+  aut_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  aut_nome VARCHAR(20) NOT NULL,
+  PRIMARY KEY (aut_id),
+  UNIQUE KEY uni_aut_nome (aut_nome)
+);
+
 CREATE TABLE dono (
 	dono_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
 	dono_nome VARCHAR(50) NOT NULL,
-	dono_endereco VARCHAR(100) NOT NULL,
-	dono_telefone VARCHAR(20) NOT NULL,
+	dono_senha VARCHAR(50) NOT NULL,
+	dono_endereco VARCHAR(100),
+	dono_telefone VARCHAR(20),
 	CONSTRAINT dono_pk PRIMARY KEY (dono_id),
 	CONSTRAINT dono_nome_uk UNIQUE KEY (dono_nome)
 );
@@ -20,3 +28,25 @@ CREATE TABLE animal (
 	CONSTRAINT animal_pk PRIMARY KEY (ani_id),
 	FOREIGN KEY da_dono_fk (ani_dono_id) REFERENCES dono (dono_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
+
+CREATE TABLE dono_autorizacao (
+  da_dono_id BIGINT UNSIGNED NOT NULL,
+  da_aut_id BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (da_dono_id, da_aut_id),
+  FOREIGN KEY aut_dono_fk (da_dono_id) REFERENCES dono (dono_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+  FOREIGN KEY aut_autorizacao_fk (da_aut_id) REFERENCES autorizacao (aut_id) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+INSERT INTO dono(dono_nome, dono_senha) VALUES('user', MD5('user123'));
+INSERT INTO dono(dono_nome, dono_senha) VALUES('admin', MD5('admin'));
+INSERT INTO autorizacao(aut_nome) VALUES('ROLE_USER');
+INSERT INTO autorizacao(aut_nome) VALUES('ROLE_ADMIN');
+INSERT INTO dono_autorizacao(da_dono_id, da_aut_id)
+SELECT dono_id, aut_id
+FROM dono, autorizacao
+WHERE dono_nome = 'user'
+AND aut_nome = 'ROLE_USER';
+INSERT INTO dono_autorizacao(da_dono_id, da_aut_id)
+SELECT dono_id, aut_id
+FROM dono, autorizacao
+WHERE dono_nome = 'admin';

@@ -1,6 +1,4 @@
 package br.gov.sp.fatec.services;
-import java.util.Collection;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,4 +57,5 @@ public class DonoServiceImpl implements DonoService{
 		if (donoRepo == null) return null;
 		return donoRepo.findById(id);
 	}
+	
 }
