@@ -24,6 +24,7 @@ public class Dono implements UserDetails{
 	private Long id;
 	
 	@Column(name = "dono_nome", unique=true, length = 50, nullable = false)
+	@JsonView(View.Main.class)
     private String nome;
 	
 	@Column(name = "dono_senha", unique=true, length = 50, nullable = false)
@@ -35,13 +36,17 @@ public class Dono implements UserDetails{
 	@Column(name = "dono_telefone", unique=false, length = 20, nullable = true)
     private String telefone;
 
-	@OneToMany(mappedBy = "dono", targetEntity = Animal.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private Collection<Animal> animais;
+	@OneToMany(mappedBy = "dono", targetEntity = Animal.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//	private Collection<Animal> animais;
+	private List<Animal> animais;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "dono_autorizacao", 
-    	joinColumns = { @JoinColumn(name = "dono_id") }, 
-    	inverseJoinColumns = { @JoinColumn(name = "aut_id") })
+//    @JoinTable(name = "dono_autorizacao", 
+//    	joinColumns = { @JoinColumn(name = "dono_id") }, 
+//    	inverseJoinColumns = { @JoinColumn(name = "aut_id") })
+	@JoinTable(name = "dono_autorizacao", 
+	joinColumns = { @JoinColumn(name = "da_dono_id") }, 
+	inverseJoinColumns = { @JoinColumn(name = "da_aut_id") })
     private List<Autorizacao> autorizacoes;
 	
 	// GETTERS E SETTERS
@@ -54,6 +59,8 @@ public class Dono implements UserDetails{
 	public void setId(Long id) {this.id = id;}
 	public String getNome() {return nome;}
 	public void setNome(String nome) {this.nome = nome;}
+	public String getSenha() {return senha;}
+	public void setSenha(String senha) {this.senha = senha;}
 	
 	
 	@Override
