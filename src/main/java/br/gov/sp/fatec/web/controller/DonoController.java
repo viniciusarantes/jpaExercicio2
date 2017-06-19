@@ -1,5 +1,7 @@
 package br.gov.sp.fatec.web.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +38,6 @@ public class DonoController {
 	@JsonView(View.All.class)
 	public ResponseEntity<Dono> pesquisar(@PathVariable("nome") String nome) {
 		Dono d = donoService.buscar(nome);
-		System.out.println("\n******************\n");
-		System.out.println("Id:"+Long.toString(d.getId())+"\nNome: "+d.getNome()+"\nTelefone: "+d.getTelefone());
-		System.out.println("\n******************\n");
 		return new ResponseEntity<Dono>(d, HttpStatus.OK);
 	}
 	
@@ -50,5 +49,12 @@ public class DonoController {
 			return new ResponseEntity<Dono>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<Dono>(dono, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "getIds")
+	@JsonView(View.All.class)
+	public ResponseEntity<List<Long>> getIds(){
+		List<Long> ids =  donoService.getIds();
+		return new ResponseEntity<List<Long>>(ids, HttpStatus.OK);
 	}
 }

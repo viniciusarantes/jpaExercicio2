@@ -8,6 +8,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import br.gov.sp.fatec.view.View;
+
 @Entity
 @Table(name = "animal")
 public class Animal {
@@ -15,10 +19,12 @@ public class Animal {
 	@Id 
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "ani_id")
+	@JsonView(View.Main.class)
 	private Long id;
 	
 	
 	@Column(name = "ani_nome", unique=false, length = 50, nullable = false)
+	@JsonView(View.Main.class)
     private String nome;
 	
 	@Column(name = "ani_especie", unique=false, length = 50, nullable = false)

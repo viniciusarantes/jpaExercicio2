@@ -21,7 +21,7 @@ import br.gov.sp.fatec.security.JwtUtils;
 import br.gov.sp.fatec.security.Login;
 
 @RestController
-@RequestMapping(value = "/access")
+@RequestMapping(value = "/login")
 public class LoginController {
 	@Autowired
 	@Qualifier("authenticationManager")

@@ -13,4 +13,7 @@ public interface DonoRepository extends CrudRepository<Dono, Long>  {
 	
 	@Query("SELECT d FROM Dono d")
 	public List<Dono> getAllDonos();
+	
+	@Query("SELECT d.id FROM Dono d")
+	public List<Long> getIds();
 }
