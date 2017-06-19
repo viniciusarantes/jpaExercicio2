@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import com.fasterxml.jackson.annotation.*;
-import br.gov.sp.fatec.model.Dono;
-import br.gov.sp.fatec.services.DonoService;
+
+import br.gov.sp.fatec.model.Animal;
 import br.gov.sp.fatec.view.View;
 
 @RestController
@@ -15,14 +15,29 @@ import br.gov.sp.fatec.view.View;
 public class AnimalController {
 
 	@Autowired
-	private DonoService donoService;
+	private AnimalService animalService;
 	
-	public void setDonoService(DonoService donoService) {
-		this.donoService = donoService;
+	public void setAnimalService(AnimalService animalService) {
+		this.animalService = animalService;
 	}
 	
-	@RequestMapping(value="/animal")
-	public String fim() {
-		return "Deu animal";
+	@RequestMapping(value = "/salvar", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@JsonView(View.All.class)
+	@ResponseStatus(HttpStatus.CREATED)
+	public Animal salvar(@RequestBody Animal animal, HttpServletRequest request, HttpServletResponse response) {
+		animal = animalService.salvar(animal);
+		response.addHeader("Location", request.getServerName() + ":" + request.getServerPort() +
+		request.getContextPath() + "/animal/getById?id=" + animal.getId());
+		return animal;
+	}
+	
+	@RequestMapping(value = "/getById")
+	@JsonView(View.All.class)
+	public ResponseEntity<Animal> get(@RequestParam(value="id", defaultValue="1") Long id) {
+		Animal animal = animalService.buscar(id);
+		if(animal == null) {
+			return new ResponseEntity<Animal>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Animal>(animal, HttpStatus.OK);
 	}
 }

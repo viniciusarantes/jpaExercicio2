@@ -6,11 +6,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.sp.fatec.repositories.AnimalRepository;
+import br.gov.sp.fatec.web.controller.AnimalService;
 import br.gov.sp.fatec.model.Animal;
 import br.gov.sp.fatec.model.Dono;
 
 @Service("animalService")
-public class AnimalServiceImpl {
+public class AnimalServiceImpl implements AnimalService {
 	public AnimalServiceImpl(){
 	}
 	
@@ -24,7 +25,6 @@ public class AnimalServiceImpl {
 		animal.setNome(nome);
 		animal.setEspecie(especie);
 		animal.setRaca(raca);
-		// Dono vinculado ao animal
 		animal.setDono(dono);
 		animalRepo.save(animal);
 	}
@@ -41,5 +41,17 @@ public class AnimalServiceImpl {
 	
 	public void setAnimalRepo(AnimalRepository animalRepo) {
 		this.animalRepo = animalRepo;
+	}
+
+	@Override
+	public Animal salvar(Animal animal) {
+		animalRepo.save(animal);
+		return null;
+	}
+
+	@Override
+	public Animal buscar(Long id) {
+		if (animalRepo == null) return null;
+		return animalRepo.findById(id);
 	}
 }	

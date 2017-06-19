@@ -11,7 +11,7 @@ import br.gov.sp.fatec.services.DonoService;
 import br.gov.sp.fatec.view.View;
 
 @RestController
-//@RequestMapping(value = "/dono")
+@RequestMapping(value = "/dono")
 public class DonoController {
 	
 	@Autowired
@@ -21,15 +21,6 @@ public class DonoController {
 		this.donoService = donoService;
 	}
 	
-	@RequestMapping(value="/")
-	public String inicio() {
-		return "Deu certo";
-	}
-	
-	@RequestMapping(value="/dono")
-	public String meio() {
-		return "Deu dono";
-	}
 	
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@JsonView(View.All.class)
@@ -37,7 +28,7 @@ public class DonoController {
 	public Dono salvar(@RequestBody Dono dono, HttpServletRequest request, HttpServletResponse response) {
 		dono = donoService.salvar(dono);
 		response.addHeader("Location", request.getServerName() + ":" + request.getServerPort() +
-		request.getContextPath() + "/usuario/getById?id=" + dono.getId());
+		request.getContextPath() + "/dono/getById?id=" + dono.getId());
 		return dono;
 	}
 	

@@ -13,4 +13,6 @@ public interface AnimalRepository extends CrudRepository<Animal, Long> {
 	public List<Animal> buscaCachorros();
 	
 	public List<Animal> findByDono(Dono dono);
+	
+	public Animal findById(Long id);
 }

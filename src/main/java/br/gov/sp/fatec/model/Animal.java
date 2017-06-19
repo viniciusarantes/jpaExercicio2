@@ -27,7 +27,6 @@ public class Animal {
 	@Column(name = "ani_raca", unique=false, length = 50, nullable = true)
     private String raca;
 
-	// Relação da chave estrangeira com chave primária é feita diretamente na instância da classe
 	@ManyToOne
 	@JoinColumn(name="ani_dono_id")
 	private Dono dono;
