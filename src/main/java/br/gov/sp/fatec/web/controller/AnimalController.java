@@ -1,5 +1,6 @@
 package br.gov.sp.fatec.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,12 +27,11 @@ public class AnimalController {
 		this.animalService = animalService;
 	}
 	
-	@RequestMapping(value = "/checklogin")
+	@RequestMapping(value = "checkLogin")
 	@JsonView(View.All.class)
 	@PreAuthorize("isAuthenticated()")
-	@ResponseStatus(HttpStatus.OK)
-	public void ok() {
-		return ;
+	public void checkLogin(){
+		return;
 	}
 	
 	@RequestMapping(value = "/salvar", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -48,12 +48,16 @@ public class AnimalController {
 	@RequestMapping(value = "/getById")
 	@JsonView(View.All.class)
 	@PreAuthorize("isAuthenticated()")
-	public ResponseEntity<Animal> get(@RequestParam(value="id", defaultValue="1") Long id, HttpServletResponse response) {
-		Animal animal = animalService.buscar(id);
-		if(animal == null) {
-			return new ResponseEntity<Animal>(HttpStatus.NOT_FOUND);
+	public ResponseEntity<List<Animal>> get(@RequestParam(value="id", defaultValue="0") Long id, HttpServletResponse response) {
+		List<Animal> animais = new ArrayList<Animal>();
+		if (id != 0){
+			Animal animal = animalService.buscar(id);
+			if (animal != null) animais.add(animal);
 		}
-		return new ResponseEntity<Animal>(animal, HttpStatus.OK);
+		else animais = animalService.getAll();
+		
+		if(animais.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<List<Animal>>(animais, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/getAll")

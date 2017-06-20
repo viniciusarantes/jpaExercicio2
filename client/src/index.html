@@ -18,7 +18,7 @@
             <div class="navbar-header">
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                  <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-              </button> <a class="navbar-brand" href="javascript:;">Início</a>
+              </button> <a class="navbar-brand inicio" href="javascript:;">Início</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
@@ -33,6 +33,7 @@
               </form>
 
               <ul class="nav navbar-nav navbar-right">
+                <li><a id="nome_label" style="font-weight: bold"></a></li>
                 <li><a href="javascript:;" class="cadastro_dono">Configurações</a></li>
                 <li><a href="javascript:;" class="logout">Logout</a></li>
               </ul>
@@ -95,8 +96,8 @@
               <input type="text" class="form-control" id="racaInput">
             </div>
             <div class="form-group">
-              <label for="donoInput">Id dono</label>
-              <input type="number" class="form-control" id="donoInput">
+              <label for="donoInput">Dono</label>
+              <select class="form-control" id="donoInput"></select>
             </div>
             <button type="submit" class="btn btn-default btn-cad-animal">Cadastrar</button>
           </form>
@@ -113,7 +114,7 @@
             </div>
             <div class="form-group">
               <label for="passwordInput">Senha</label>
-              <input type="password" class="form-control" id="passwordInput">
+              <input type="password" class="form-control" id="pwdDonoInput">
             </div>
             <div class="form-group">
               <label for="enderecoInput">Endereço</label>
@@ -123,7 +124,7 @@
               <label for="telefoneInput">Telefone</label>
               <input type="text" class="form-control" id="telefoneInput">
             </div>
-            <button type="submit" class="btn btn-default btn-cad-dono">Cadastrar</button>
+            <button type="submit" class="btn btn-default btn-cad-dono">Atualizar</button>
           </form>
         </div>
       </div>

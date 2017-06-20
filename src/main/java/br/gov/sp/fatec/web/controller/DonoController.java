@@ -45,7 +45,7 @@ public class DonoController {
 	
 	@RequestMapping(value = "/getById")
 	@JsonView(View.All.class)
-	public ResponseEntity<Dono> get(@RequestParam(value="id", defaultValue="1") Long id) {
+	public ResponseEntity<Dono> get(@RequestParam(value="id", defaultValue="0") Long id) {
 		Dono dono = donoService.buscar(id);
 		if(dono == null) {
 			return new ResponseEntity<Dono>(HttpStatus.NOT_FOUND);
