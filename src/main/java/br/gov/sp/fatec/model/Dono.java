@@ -39,9 +39,9 @@ public class Dono implements UserDetails{
 	@JsonView(View.Main.class)
     private String telefone;
 
-	@OneToMany(mappedBy = "dono", targetEntity = Animal.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//	@OneToMany(mappedBy = "dono", targetEntity = Animal.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 //	private Collection<Animal> animais;
-	private List<Animal> animais;
+//	private List<Animal> animais;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 //    @JoinTable(name = "dono_autorizacao", 
@@ -53,7 +53,7 @@ public class Dono implements UserDetails{
     private List<Autorizacao> autorizacoes;
 	
 	// GETTERS E SETTERS
-	public Collection<Animal> getAnimais() {return animais;}
+//	public Collection<Animal> getAnimais() {return animais;}
 	public String getEndereco() {return endereco;}
 	public void setEndereco(String endereco) {this.endereco = endereco;}
 	public String getTelefone() {return telefone;}

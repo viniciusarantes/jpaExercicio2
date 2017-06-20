@@ -69,7 +69,7 @@ public class AnimalServiceImpl implements AnimalService {
 	@Override
 	public boolean deletar(Long id) {
 		try {
-			animalRepo.deleteAll();
+			animalRepo.delete(id);
 			return true;
 		}
 		catch (Exception e){

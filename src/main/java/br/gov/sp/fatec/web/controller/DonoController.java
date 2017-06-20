@@ -14,6 +14,7 @@ import br.gov.sp.fatec.services.DonoService;
 import br.gov.sp.fatec.view.View;
 
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/dono")
 public class DonoController {
 	

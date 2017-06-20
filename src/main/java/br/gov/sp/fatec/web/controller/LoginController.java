@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,6 +32,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(path = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@CrossOrigin(origins = "*", exposedHeaders = "Token")
 	public Dono login(@RequestBody Login login, HttpServletResponse response) throws JsonProcessingException {
 		Authentication credentials = new UsernamePasswordAuthenticationToken(login.getUsername(), login.getPassword());
 		Dono usuario = (Dono) auth.authenticate(credentials).getPrincipal();
