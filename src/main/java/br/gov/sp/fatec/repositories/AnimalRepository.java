@@ -15,4 +15,6 @@ public interface AnimalRepository extends CrudRepository<Animal, Long> {
 	public List<Animal> findByDono(Dono dono);
 	
 	public Animal findById(Long id);
+	
+	public void delete(Animal animal); 
 }

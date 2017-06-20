@@ -15,6 +15,7 @@ import br.gov.sp.fatec.view.View;
 
 @Entity
 @Table(name = "dono")
+
 public class Dono implements UserDetails{
 	
 	@Id 
@@ -31,9 +32,11 @@ public class Dono implements UserDetails{
 	private String senha;
 	
 	@Column(name = "dono_endereco", unique=false, length = 100, nullable = true)
+	@JsonView(View.Main.class)
     private String endereco;
 	
 	@Column(name = "dono_telefone", unique=false, length = 20, nullable = true)
+	@JsonView(View.Main.class)
     private String telefone;
 
 	@OneToMany(mappedBy = "dono", targetEntity = Animal.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)

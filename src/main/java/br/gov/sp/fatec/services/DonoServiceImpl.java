@@ -1,5 +1,7 @@
 package br.gov.sp.fatec.services;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +48,8 @@ public class DonoServiceImpl implements DonoService{
 	}
 
 	public Dono salvar(Dono dono) {
+		String crypto = encodeMd5(dono.getSenha());
+		dono.setSenha(crypto);
 		donoRepo.save(dono);
 		return dono;
 	}
@@ -63,5 +67,39 @@ public class DonoServiceImpl implements DonoService{
 	public List<Long> getIds(){
 		return donoRepo.getIds();
 	}
+	
+	@Override
+	public boolean deletar(Long id){
+		try {
+			donoRepo.delete(id);
+			return true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	@Override
+	public List<Dono> getAll(){
+		return (List<Dono>) donoRepo.findAll();
+	}
+	
+	
+	public String encodeMd5(String input) {
+        String md5 = null;
+        if(null == input) return null;
+        try {
+        //Create MessageDigest object for MD5
+        MessageDigest digest = MessageDigest.getInstance("MD5");
+        //Update input string in message digest
+        digest.update(input.getBytes(), 0, input.length());
+        //Converts message digest value in base 16 (hex) 
+        md5 = new BigInteger(1, digest.digest()).toString(16);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return md5;
+    }
 	
 }

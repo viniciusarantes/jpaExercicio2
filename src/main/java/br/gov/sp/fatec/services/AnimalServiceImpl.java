@@ -1,4 +1,6 @@
 package br.gov.sp.fatec.services;
+import java.util.List;
+
 import javax.persistence.Column;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.sp.fatec.repositories.AnimalRepository;
 import br.gov.sp.fatec.repositories.DonoRepository;
-import br.gov.sp.fatec.web.controller.AnimalService;
 import br.gov.sp.fatec.model.Animal;
 import br.gov.sp.fatec.model.Dono;
 
@@ -58,5 +59,22 @@ public class AnimalServiceImpl implements AnimalService {
 	public Animal buscar(Long id) {
 		if (animalRepo == null) return null;
 		return animalRepo.findById(id);
+	}
+	
+	@Override
+	public List<Animal> getAll(){
+		return (List<Animal>) animalRepo.findAll();
+	}
+	
+	@Override
+	public boolean deletar(Long id) {
+		try {
+			animalRepo.deleteAll();
+			return true;
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+		return false;
 	}
 }	

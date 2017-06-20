@@ -28,13 +28,16 @@ public class Animal {
     private String nome;
 	
 	@Column(name = "ani_especie", unique=false, length = 50, nullable = false)
+	@JsonView(View.Main.class)
     private String especie;
 	
 	@Column(name = "ani_raca", unique=false, length = 50, nullable = true)
+	@JsonView(View.Main.class)
     private String raca;
 
 	@ManyToOne
 	@JoinColumn(name="ani_dono_id")
+	@JsonView(View.Main.class)
 	private Dono dono;
 
 	

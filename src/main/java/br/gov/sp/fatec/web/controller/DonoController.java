@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import com.fasterxml.jackson.annotation.*;
+
 import br.gov.sp.fatec.model.Dono;
 import br.gov.sp.fatec.services.DonoService;
 import br.gov.sp.fatec.view.View;
@@ -51,10 +52,26 @@ public class DonoController {
 		return new ResponseEntity<Dono>(dono, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/getAll")
+	@JsonView(View.All.class)
+	public ResponseEntity<List<Dono>> getAllDonos(){
+		List<Dono> donos = donoService.getAll();
+		if (donos == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<List<Dono>>(donos, HttpStatus.OK);
+	}
+	
 	@RequestMapping(value = "getIds")
 	@JsonView(View.All.class)
 	public ResponseEntity<List<Long>> getIds(){
 		List<Long> ids =  donoService.getIds();
 		return new ResponseEntity<List<Long>>(ids, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/delete/{id}")
+	@JsonView(View.All.class)
+	public ResponseEntity<Object> deletar(@PathVariable("id") Long id) {
+		boolean ret = donoService.deletar(id);
+		if (ret) return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 }
